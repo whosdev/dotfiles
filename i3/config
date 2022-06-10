@@ -19,19 +19,21 @@ font pango:monospace 8P
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
 
 # start program launcher
 # bindsym $mod+d exec --no-startup-id rofi -width 22 -show drun -show-icons -drun-icon-theme Flat-Remix-Blue-Dark
-bindsym $mod+d exec ~/scripts/launcher.sh
-
+bindsym $mod+d exec --no-startup-id rofi -width 14 -show drun -show-icons -drun-icon-theme Dracula
+#failsafe
+bindsym $mod+Shift+d exec dmenu_run 
 # launch quick menu
-bindsym $mod+z exec ~/scripts/apps.sh
 #power menu
-bindsym $mod+p exec ~/scripts/powermenu.sh
+#bindsym $mod+F11 exec --no-startup-id menu_mpd
+bindsym $mod+Ctrl+m exec --no-startup-id menu_network
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/bin/menu_powermenu
 
 # mpv music controller bindings
 #bindsym $mod+Shift+P exec $music pause
@@ -60,7 +62,7 @@ bindsym $mod+m exec nautilus
 #bindsym $mod+Ctrl+t exec --no-startup-id "picom --experimental-backends -b"
 #bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 #bindsym --release Print exec scrot -d 3 $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
-bindsym --release Print exec scrot -s -e 'mv "$f" ~/Imagens/Screenshots/ && dunstify "Area Captured." "$f" -a Cheese' &
+bindsym --release Print exec scrot -s -e 'mv "$f" ~/Pictures/Screenshots/ && dunstify "Area Captured." "$f" -a Cheese' &
 #bindsym Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 #bindsym Print exec "scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png; sleep 1; exec notify-send 'Full screen screenshot has been saved' "
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
@@ -110,10 +112,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle;exec notify-send 'floating toggle/tiling'
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle;exec notify-send 'float-toggle'
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -137,11 +139,8 @@ bindsym $mod+Ctrl+Left workspace prev
 #bindsym $mod+d focus child
 
 # Shortcuts for brightness
-bindsym XF86MonBrightnessUp exec light -A 3 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 3 # decrease screen brightness
-bindsym $mod+XF86MonBrightnessUp exec light -A 10 # increase screen brightness
-bindsym $mod+XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
-# Shortcut for soundcontrol
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
@@ -186,15 +185,58 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 
 # Open specific applications in floating mode
+for_window [window_role="About"] floating enable
 for_window [title="alsamixer"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="mpv"] floating enable
 for_window [title="i3_help"] floating enable sticky enable
 for_window [class="Lxappearance"] floating enable sticky enable 
-for_window [class="Nitrogen"] floating enable sticky enable
+#for_window [class="Steam"] floating enable
+for_window [title="nmtui"] floating enable
+for_window [class="Spotify"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable
 for_window [class="Timeset-gui"] floating enable
+for_window [title="Page Unresponsive"] floating enable
+for_window [class="gnome-calculator"] floating enable
+for_window [class="wine"] floating enable
+for_window [class="Telegram"] floating enable
+
+
+
+
+
+# Steam floating
+
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+
+
+
+
+# Set Apps for different workspace
+
+for_window [class="google-chrome-stable"] move to workspace $ws2
+for_window [class="firefox"] move to workspace $ws2
+assign [class="(?i)code"] $ws3
+for_window [class="Spotify"] move to workspace $ws4
+for_window [class="Telegram"] move to workspace $ws5
+for_window [class="whatsapp-nativefier"] move to workspace $ws5
+assign [class="(?i)Steam"] $ws6
+for_window [class="wine"] move to workspace $ws6
+for_window [class="lutris"] move to workspace $ws6
+for_window [class="qBittorrent"] move to workspace $ws7
+for_window [class="Free Download Manager"] move to workspace $ws7
+
+
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -254,13 +296,17 @@ bindsym $mod+Ctrl+l exec betterlockscreen -l dim
 
 
 # Autostart applications
+exec_always --no-startup-id polybar
 exec_always --no-startup-id $HOME/.config/polybar/scripts/startup.sh
-exec --no-startup-id "picom --experimental-backends -b"
+exec --no-startup-id "picom --experimental-backends -b —backend glx"
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id autotiling
-#exec --no-startup-id nitrogen --restore; sleep 1; 
-exec --no-startup-id feh --bg-fill /home/taveren/Imagens/Wallpaper/alena-aenami-horizon-1k.jpg
+# change menu key to super
+exec_always --no-startup-id xmodmap -e "keysym Menu = Super_R"
+# wallpaper
+exec --no-startup-id feh --bg-fill /home/taveren/Pictures/Wallpaper/alena-aenami-horizon-1k.jpg
+#not working
 exec --no-startup-id xautolock -time 10 -locker betterlockscreen
 
 
