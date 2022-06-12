@@ -53,7 +53,7 @@ bindsym $mod+p exec --no-startup-id ~/.config/rofi/bin/menu_powermenu
 #bindsym $mod+Shift+equal exec $music vol 10
 
 # Allow scripts to interface with dbus
-exec_always --no-startup-id ~/scripts/misc/xdbus.sh
+#exec_always --no-startup-id ~/scripts/misc/xdbus.sh
 
 
 # Start application
@@ -118,7 +118,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle;exec notify-send 'floating toggle/tiling'
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle;exec notify-send 'float-toggle'
+bindsym $mod+space focus mode_toggle;exec notify-send 'float-focus'
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -144,6 +144,11 @@ bindsym $mod+Ctrl+Left workspace prev
 # Shortcuts for brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+# Shortcuts for brightness on steroids
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id brightnessctl set +20%
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id brightnessctl set  20%-
+
+
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
@@ -221,7 +226,7 @@ for_window [window_role="webconsole"] floating enable
 
 
 # Steam floating
-
+for_window [class="Lutris"] floating enable
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
 for_window [class="^Steam$" title=".* - Chat"] floating enable
@@ -238,15 +243,15 @@ for_window [title="^Steam Keyboard$"] floating enable
 
 # Set Apps for different workspace
 
-for_window [class="google-chrome-stable"] move to workspace $ws2
+for_window [class="Google-chrome"] move to workspace $ws2
 for_window [class="firefox"] move to workspace $ws2
 assign [class="(?i)code"] $ws3
 for_window [class="Spotify"] move to workspace $ws4
-for_window [class="Telegram"] move to workspace $ws5
+for_window [title="Telegram"] move to workspace $ws5
 for_window [class="whatsapp-nativefier"] move to workspace $ws5
 assign [class="(?i)Steam"] $ws6
 for_window [class="wine"] move to workspace $ws6
-for_window [class="lutris"] move to workspace $ws6
+for_window [class="Lutris"] move to workspace $ws6
 for_window [class="qBittorrent"] move to workspace $ws7
 for_window [class="Free Download Manager"] move to workspace $ws7
 
@@ -304,15 +309,14 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+Ctrl+l exec betterlockscreen -l dim
-
+bindsym $mod+Ctrl+l exec i3lock -n -i ~/Pictures/Wallpaper/alena-aenami-budapest.jpg
 
 
 
 # Autostart applications
 exec_always --no-startup-id polybar
 exec_always --no-startup-id $HOME/.config/polybar/scripts/startup.sh
-exec --no-startup-id "picom --experimental-backends -b —backend glx"
+exec --no-startup-id "picom --experimental-backends -b"
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id autotiling
@@ -321,7 +325,9 @@ exec_always --no-startup-id xmodmap -e "keysym Menu = Super_R"
 # wallpaper
 exec --no-startup-id feh --bg-fill /home/taveren/Pictures/Wallpaper/alena-aenami-horizon-1k.jpg
 #not working
-exec --no-startup-id xautolock -time 10 -locker betterlockscreen
+exec --no-startup-id xautolock -time 10 -locker i3lock-color
+exec --no-startup-id xss-lock -- i3lock -n -i ~/Pictures/Wallpaper/alena-aenami-budapest.jpg &
+
 
 
 # set colors
