@@ -246,6 +246,7 @@ for_window [title="^Steam Keyboard$"] floating enable
 assign [class="(?i)firefox"] $ws2
 assign [class="(?i)google-chrome"] $ws2
 assign [class="(?i)code"] $ws3
+assign [class="(?i)Spotify"] $ws4
 assign [class="(?i)telegram"] $ws5
 assign [class="(?i)slack"] $ws5
 assign [class="(?i)discord"] $ws5
