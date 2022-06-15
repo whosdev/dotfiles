@@ -39,8 +39,8 @@ yay -S nerd-fonts-complete
 
 ## Git cloning this shit
 cd bin && git clone https://github.com/whosdev/dotfiles
-cd dotfiles && cp .config ~/  ## If somehow get an error, just flippin copy everything to the dotfiles folder.
-cp .icons ~/
+cd dotfiles && cp .config .icons ~/ 
+## If somehow get an error, just flippin copy everything to the dotfiles folder.
 
 ## Few other apps
 
@@ -50,3 +50,4 @@ sudo pacman -S wine steam lutris discord
 sysctl vm.swappiness=20 && sysctl -p /etc/sysctl.conf
 
 ## not sure if there's anything more to do, might be, can't remember. If I do another reinstall I'll try to put it in here.
+## I'll probably setup some qemu/kvm stuff as well, although I dunno when.
