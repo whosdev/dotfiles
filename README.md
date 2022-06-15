@@ -40,7 +40,7 @@ yay -S nerd-fonts-complete
 ## Git cloning this shit
 cd bin && git clone https://github.com/whosdev/dotfiles
 cd dotfiles && cp .config .icons ~/ 
-## If somehow get an error, just flippin copy everything to the dotfiles folder.
+## If somehow get an error, just flippin copy everything to the ~/ folder.
 
 ## Few other apps
 
