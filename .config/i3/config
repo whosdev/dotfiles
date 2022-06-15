@@ -312,13 +312,14 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+Ctrl+l exec i3lock -n -i ~/Pictures/Wallpaper/alena-aenami-budapest.jpg
+bindsym $mod+Ctrl+l exec i3lock -n -i ~/.config/i3/Wallpaper/alena-aenami-budapest.jpg
 
 
 
 # Autostart applications
 exec_always --no-startup-id polybar
 exec_always --no-startup-id $HOME/.config/polybar/scripts/startup.sh
+#exec_always --no-startup-id $HOME/.config/polybar/config_template
 exec --no-startup-id "picom --experimental-backends -b"
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
@@ -326,10 +327,10 @@ exec_always --no-startup-id autotiling
 # change menu key to super
 exec_always --no-startup-id xmodmap -e "keysym Menu = Super_R"
 # wallpaper
-exec --no-startup-id feh --bg-fill /home/taveren/Pictures/Wallpaper/alena-aenami-horizon-1k.jpg
+exec --no-startup-id feh --bg-fill ~/.config/i3/Wallpaper/alena-aenami-horizon-1k.jpg
 #not working
 exec --no-startup-id xautolock -time 10 -locker i3lock-color
-exec --no-startup-id xss-lock -- i3lock -n -i ~/Pictures/Wallpaper/alena-aenami-budapest.jpg &
+exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/Wallpaper/alena-aenami-budapest.jpg &
 
 
 
