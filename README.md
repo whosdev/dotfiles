@@ -31,12 +31,16 @@ sudo pacman -S neofetch alacritty make arandr blueman bluez dmenu2 feh git go gn
 
 
 ## Yay stuff
- yay -S autotiling-git spotify visual-studio-code-bin btop google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion
+ yay -S autotiling-git spotify visual-studio-code-bin btop google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion nerd-fonts-jetbrains-mono
+
+## if you want more fonts
+yay -S nerd-fonts-complete
 
 
 ## Git cloning this shit
 cd bin && git clone https://github.com/whosdev/dotfiles
 cd dotfiles && cp .config ~/  ## If somehow get an error, just flippin copy everything to the dotfiles folder.
+cp .icons ~/
 
 ## Few other apps
 
