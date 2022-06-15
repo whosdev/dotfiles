@@ -37,10 +37,10 @@ sudo pacman -S neofetch alacritty make arandr blueman bluez dmenu2 feh git go gn
 yay -S nerd-fonts-complete
 
 
-## Git cloning this shit
+## Git cloning and copying this shit
 cd bin && git clone https://github.com/whosdev/dotfiles
 cd dotfiles && cp .config .icons ~/ 
-## If somehow get an error, just flippin copy everything to the ~/ folder.
+
 
 ## Few other apps
 
@@ -51,3 +51,4 @@ sysctl vm.swappiness=20 && sysctl -p /etc/sysctl.conf
 
 ## not sure if there's anything more to do, might be, can't remember. If I do another reinstall I'll try to put it in here.
 ## I'll probably setup some qemu/kvm stuff as well, although I dunno when.
+## there's also some systemctl stuff to enable/start bluetooth, networkmanager and maybe some other stuff. But did all this from memory, so I can't remember the other services, so if I ever do another reinstall, which is only a question of when. I will finish this.:wq (kinda forgot I wasn't on vim for a second)
