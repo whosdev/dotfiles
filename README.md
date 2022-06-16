@@ -27,7 +27,7 @@ Aenami wallpapers
 
 ## Installing basic apps and stuff
 
-sudo pacman -S neofetch alacritty make arandr blueman bluez dmenu2 feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop ttf-nerd-fonts-symbols python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst xmodmap
+sudo pacman -S neofetch alacritty make arandr blueman bluez dmenu2 feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop ttf-nerd-fonts-symbols python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst xmodmap ncdu 
 
 
 ## Yay stuff
