@@ -64,8 +64,8 @@ bindsym $mod+m exec nautilus
 #bindsym $mod+t exec --no-startup-id pkill picom
 #bindsym $mod+Ctrl+t exec --no-startup-id "picom --experimental-backends -b"
 #bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-#bindsym --release Print exec scrot -d 3 $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
-bindsym --release Print exec scrot -s -e 'mv "$f" ~/Pictures/Screenshots/ && dunstify "Area Captured." "$f" -a Cheese' &
+bindsym Print exec maim $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png && dunstify "Screenshot taken"
+bindsym $mod+Print exec maim -s $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png && dunstify "Area Captured."
 #bindsym Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 #bindsym Print exec "scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png; sleep 1; exec notify-send 'Full screen screenshot has been saved' "
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
