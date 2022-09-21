@@ -27,15 +27,33 @@ Aenami wallpapers
 
 ## Installing basic apps and stuff
 
-sudo pacman -S neofetch alacritty make arandr blueman bluez dmenu2 feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop ttf-nerd-fonts-symbols python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst xmodmap ncdu 
+sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop  python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst ncdu 
 
 
 ## Yay stuff
- yay -S autotiling-git spotify visual-studio-code-bin btop google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion nerd-fonts-jetbrains-mono
+ yay -S autotiling-git spotify visual-studio-code-bin btop google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin
 
 ## if you want more fonts
 yay -S nerd-fonts-complete
 
+## Swaping capslock:esc
+nvim /etc/X11/xorg.conf.d/00-keyboard.conf   
+Option "XkbOptions" "caps:swapescape" 
+
+#enable tap/two/threefinger touchpad
+
+sudo mkdir -p /etc/X11/xorg.conf.d && sudo tee <<'EOF' /etc/X11/xorg.conf.d/90-touchpad.conf 1> /dev/null
+Section "InputClass"
+        Identifier "touchpad"
+        MatchIsTouchpad "on"
+        Driver "libinput"
+        Option "Tapping" "on"
+        Option "TappingButtonMap" "lrm"
+        Option "NaturalScrolling" "on"
+        Option "ScrollMethod" "twofinger"
+EndSection
+
+EOF
 
 ## Git cloning and copying this shit
 cd bin && git clone https://github.com/whosdev/dotfiles
