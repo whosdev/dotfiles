@@ -6,7 +6,7 @@ set $mod Mod4
 
 # Window Borders
 default_border none
-default_floating_border 1pixel 
+#default_floating_border 1pixel 
 
 # Hides vertical and horizontal borders when there's only one window
 hide_edge_borders both
@@ -14,6 +14,8 @@ hide_edge_borders both
 # Change keyboard layout US to US deadkeys and vice versa
 bindsym $mod+Ctrl+F11 exec setxkbmap -layout us -variant intl;exec notify-send 'Deadkeys Layout'
 bindsym $mod+Shift+F11 exec setxkbmap -layout us;exec notify-send 'US Layout'
+bindsym $mod+F11 exec setxkbmap -layout us -variant colemak_dh;exec notify-send 'Colemak Layout'
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8P
@@ -27,6 +29,9 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+q kill
 
+# cycle windows
+bindsym $mod+Tab exec rofi -show window -drun-icon-theme Dracula
+
 # start program launcher
 # bindsym $mod+d exec --no-startup-id rofi -width 22 -show drun -show-icons -drun-icon-theme Flat-Remix-Blue-Dark
 bindsym $mod+d exec --no-startup-id rofi -width 14 -show drun -show-icons -drun-icon-theme Dracula
@@ -34,7 +39,7 @@ bindsym $mod+d exec --no-startup-id rofi -width 14 -show drun -show-icons -drun-
 bindsym $mod+Shift+d exec dmenu_run 
 # launch quick menu
 #power menu
-#bindsym $mod+F11 exec --no-startup-id menu_mpd
+bindsym $mod+Shift+m exec --no-startup-id spotify
 bindsym $mod+Ctrl+m exec --no-startup-id menu_network
 bindsym $mod+p exec --no-startup-id ~/.config/rofi/bin/menu_powermenu
 
@@ -61,11 +66,12 @@ bindsym $mod+p exec --no-startup-id ~/.config/rofi/bin/menu_powermenu
 bindsym $mod+n exec google-chrome-stable
 bindsym $mod+Shift+n exec google-chrome-stable --incognito
 bindsym $mod+m exec nautilus
+bindsym Print exec maim $HOME/Pictures/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png && dunstify "Screenshot taken"
+bindsym $mod+Print exec maim -s $HOME/Pictures/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png && dunstify "Area Captured."
 #bindsym $mod+t exec --no-startup-id pkill picom
 #bindsym $mod+Ctrl+t exec --no-startup-id "picom --experimental-backends -b"
 #bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec maim $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png && dunstify "Screenshot taken"
-bindsym $mod+Print exec maim -s $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png && dunstify "Area Captured."
+#bindsym --release Print exec scrot -d 3 $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 #bindsym Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 #bindsym Print exec "scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png; sleep 1; exec notify-send 'Full screen screenshot has been saved' "
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
@@ -100,7 +106,6 @@ bindsym $mod+Shift+Right move right
 workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
-
 # split orientation
 bindsym $mod+h split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
@@ -140,24 +145,29 @@ bindsym $mod+Ctrl+Left workspace prev
 
 # focus the child container
 #bindsym $mod+d focus child
-
+bindsym $mod+Ctrl+b exec sudo timeshift-gtk
 # Shortcuts for brightness
+bindsym Ctrl+XF86MonBrightnessUp exec --no-startup-id brightnessctl set +1%
+bindsym Ctrl+XF86MonBrightnessDown exec --no-startup-id brightnessctl set 1%-
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 # Shortcuts for brightness on steroids
 bindsym Shift+XF86MonBrightnessUp exec --no-startup-id brightnessctl set +20%
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id brightnessctl set  20%-
 
-
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
+
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+#bindsym Shift+F10 exec playerctl play
+#bindsym Ctrl+F11 exec playerctl pause
+#bindsym Shift+F11 exec playerctl next
+#bindsym Shift+F9 exec playerctl previous
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -169,6 +179,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
+set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -180,6 +191,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -191,6 +203,7 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Open specific applications in floating mode
 for_window [window_role="About"] floating enable
@@ -198,6 +211,8 @@ for_window [title="Bluetooth"] floating enable
 for_window [title="alsamixer"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="mpv"] floating enable
+for_window [title="xsensors"] floating enable
+for_window [class="gparted"] floating enable
 for_window [title="i3_help"] floating enable sticky enable
 for_window [class="Lxappearance"] floating enable sticky enable 
 #for_window [class="Steam"] floating enable
@@ -211,6 +226,8 @@ for_window [class="gnome-calculator"] floating enable
 for_window [class="wine"] floating enable
 #for_window [class="Telegram"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="timeshift*"] floating enable
+for_window [class="woeusb-ng"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable 
 for_window [window_role="task_dialog"] floating enable
@@ -221,6 +238,8 @@ for_window [window_role="Organizer"] floating enable
 for_window [window_role="toolbox"] floating enable
 for_window [window_role="page-info"] floating enable	
 for_window [window_role="webconsole"] floating enable
+for_window [class="Yad" title="yad-calendar"] floating enable
+
 
 
 
@@ -246,19 +265,34 @@ for_window [title="^Steam Keyboard$"] floating enable
 assign [class="(?i)firefox"] $ws2
 assign [class="(?i)google-chrome"] $ws2
 assign [class="(?i)code"] $ws3
-assign [class="(?i)Spotify"] $ws4
+assign [class="(?i)Spotify*"] $ws4
+assign [class="(?i)TIDAL"] $ws4
 assign [class="(?i)telegram"] $ws5
 assign [class="(?i)slack"] $ws5
 assign [class="(?i)discord"] $ws5
 assign [class="(?i)whatsapp-nativefier"] $ws5
 assign [class="(?i)telegram-desktop"] $ws5
 assign [class="(?i)lutris"] $ws6
+assign [class="(?i)wine*"] $ws6
 assign [class="(?i)Steam"] $ws6
 assign [class="(?i)qBittorrent"] $ws7
 assign [class="(?i)Free Download Manager"] $ws7
+assign [class="(?i)anydesk*"] $ws7
 assign [class="(?i)Notion*"] $ws8
-assign [class="(?i)zathura"] $ws8
+assign [class="(?i)zathura"] $ws10
+assign [class="(?i)calibre*"] $ws10
+assign [class="(?i)libreoffice*"] $ws10
+assign [class="(?i)calendar*"] $ws8
+assign [class="(?i)onlyoffice*"] $ws10
+assign [class="(?o)qemu*"] $ws9
+assign [class="(?o)virt-manager"] $ws9
 
+#workaround chrome titlebar
+for_window [class=Chromium] border pixel 1
+
+# Move to diffent workspace
+for_window [class="Spotify"] move to workspace $ws4
+for_window [class="tidal-hifi-bin"] move to workspace $ws4
 
 
 # switch to workspace with urgent window automatically
@@ -319,20 +353,20 @@ bindsym $mod+Ctrl+l exec i3lock -n -i ~/.config/i3/Wallpaper/alena-aenami-budape
 
 # Autostart applications
 exec_always --no-startup-id polybar
+exec --no-startup-id libinput-gestures
 exec_always --no-startup-id $HOME/.config/polybar/scripts/startup.sh
 #exec_always --no-startup-id $HOME/.config/polybar/config_template
-exec --no-startup-id "picom --experimental-backends -b"
+exec_always --no-startup-id "picom --experimental-backends -b"
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id autotiling
-# change menu key to super
-exec_always --no-startup-id xmodmap -e "keysym Menu = Super_R"
+# Swap caps to esc
+#exec_always --no-startup-id setxkbmap -option caps:swapescape
 # wallpaper
 exec --no-startup-id feh --bg-fill ~/.config/i3/Wallpaper/alena-aenami-horizon-1k.jpg
 #not working
-exec --no-startup-id xautolock -time 10 -locker i3lock-color
-exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/Wallpaper/alena-aenami-budapest.jpg &
-
+exec --no-startup-id xautolock -time 10 -locker i3lock -n -i ~/.config/i3/Wallpaper/alena-aenami-budapest.jpg
+exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/Wallpaper/alena-aenami-budapest.jpg
 
 
 # set colors
@@ -394,8 +428,7 @@ set $urgent-bg-color     #E53935
 # Set inner/outer gaps
 gaps outer 2
 gaps inner 2
-gaps top 19
-
+gaps top 17
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
