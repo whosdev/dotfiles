@@ -27,8 +27,7 @@ Aenami wallpapers
 
 ## Installing basic apps and stuff
 
-sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop  python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst ncdu jq bq
-
+sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop  python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst ncdu jq bq autorandr
 
 ## Yay stuff
  yay -S autotiling-git spotify visual-studio-code-bin btop google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin google-calendar-nativefier
@@ -66,6 +65,11 @@ sudo pacman -S wine steam lutris discord
 
 ## Setting up swappiness to 20, unless you're using zram
 sysctl vm.swappiness=20 && sysctl -p /etc/sysctl.conf
+
+## autorandr so you dont have to use xrand/arandr every goddamn time you use an external display.
+autorandr --save mobile ## Saving mobile (only laptop screen)
+autorandr --save docked ## Saving HDMI (in my case when I use it on clamshell/charging)
+
 
 ## not sure if there's anything more to do, might be, can't remember. If I do another reinstall I'll try to put it in here.
 ## I'll probably setup some qemu/kvm stuff as well, although I dunno when.
