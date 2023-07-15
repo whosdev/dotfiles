@@ -35,7 +35,12 @@ sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-ca
 ## if you want more fonts
 yay -S nerd-fonts-complete
 
-## Swaping capslock:esc
+## increase zram 4gb to 8gb if you're running archinstall
+nvim /etc/systemd/zram-generator.conf ## and change zram file to your desire
+zram-size=8192
+
+
+## if youre using a laptop, swap capslock:esc
 nvim /etc/X11/xorg.conf.d/00-keyboard.conf   
 Option "XkbOptions" "caps:swapescape" 
 
