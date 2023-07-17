@@ -29,8 +29,8 @@ Aenami wallpapers
 
 sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop  python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst ncdu jq bq autorandr pamixer
 
-## Yay stuff
- yay -S autotiling-git spotify visual-studio-code-bin google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin google-calendar-nativefier
+## community stuff
+ paru -S autotiling-git spotify visual-studio-code-bin google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin google-calendar-nativefier rofi-calc
 
 ## if you want more fonts
 yay -S nerd-fonts-complete
