@@ -27,13 +27,17 @@ Aenami wallpapers
 
 ## Installing basic apps and stuff
 
-sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop  python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst ncdu jq bq autorandr
+sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-calculator lxappearance neovim networkmanager network-manager-applet mpv maim nautilus rofi ranger qbittorrent telegram-desktop  python python-pip polybar wget wine xautolock xclip xdotool xdg-utils xss-lock youtube-dl zathura brightnessctl dunst ncdu jq bq autorandr pamixer
 
 ## Yay stuff
- yay -S autotiling-git spotify visual-studio-code-bin btop google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin google-calendar-nativefier
+ yay -S autotiling-git spotify visual-studio-code-bin google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin google-calendar-nativefier
 
 ## if you want more fonts
 yay -S nerd-fonts-complete
+
+## services 
+sudo systemctl enable bluetooth.service --now
+sudo systemctl enable cronie.service --now ## this is for timeshift, plus other stuff
 
 ## increase zram 4gb to 8gb if you're running archinstall
 nvim /etc/systemd/zram-generator.conf ## and change zram file to your desire
@@ -59,17 +63,11 @@ EndSection
 
 EOF
 
-## Git cloning and copying this shit
-cd bin && git clone https://github.com/whosdev/dotfiles
-cd dotfiles && cp .config .icons ~/ 
-
-
 ## Few other apps
 
 sudo pacman -S wine steam lutris discord
 
-## Setting up swappiness to 20, unless you're using zram
-sysctl vm.swappiness=20 && sysctl -p /etc/sysctl.conf
+
 
 ## autorandr so you dont have to use xrand/arandr every goddamn time you use an external display.
 autorandr --save mobile ## Saving mobile (only laptop screen)
