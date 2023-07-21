@@ -25,7 +25,7 @@ sudo pacman -S neofetch alacritty make arandr blueman bluez  feh git go gnome-ca
  paru -S autotiling-git spotify visual-studio-code-bin google-chrome freedownloadmanager dracula-icons-git rofi-greenclip rofi-power-menu picom-ibhagwan-git notion-app-enhanced nerd-fonts-jetbrains-mono timeshift-bin google-calendar-nativefier rofi-calc
 
 ## if you want more fonts
-yay -S nerd-fonts-complete
+paru -S nerd-fonts-complete
 
 ## services 
 sudo systemctl enable bluetooth.service --now
@@ -36,7 +36,7 @@ nvim /etc/systemd/zram-generator.conf ## and change zram file to your desire
 zram-size=8192
 
 
-## allow bluez to read know your bluetooth headset battery
+## allow bluez to show your bluetooth headset battery
 
 cp /usr/lib/systemd/system/bluetooth.service /etc/systemd/system/
 sed -i -r 's/ExecStart=.+/& -E/' /etc/systemd/system/bluetooth.service
