@@ -1,20 +1,12 @@
 # dotfiles
 i3-gaps,
-
 polybar, 
-
 rofi, 
-
 rofi-power-menu  ,
-
 dunst ,
-
 picom-ibhagwan-git,
-
 alacritty,
-
 Dracula Icons,
-
 Nerd Fonts,
 
 Blur on Alacritty, Rofi, Nautilus, Spotify and vscode.
@@ -44,24 +36,13 @@ nvim /etc/systemd/zram-generator.conf ## and change zram file to your desire
 zram-size=8192
 
 
-## if youre using a laptop, swap capslock:esc
-nvim /etc/X11/xorg.conf.d/00-keyboard.conf   
-Option "XkbOptions" "caps:swapescape" 
+## allow bluez to read know your bluetooth headset battery
 
-#enable tap/two/threefinger touchpad
+cp /usr/lib/systemd/system/bluetooth.service /etc/systemd/system/
+sed -i -r 's/ExecStart=.+/& -E/' /etc/systemd/system/bluetooth.service
+systemctl daemon-reload
+systemctl restart bluetooth
 
-sudo mkdir -p /etc/X11/xorg.conf.d && sudo tee <<'EOF' /etc/X11/xorg.conf.d/90-touchpad.conf 1> /dev/null
-Section "InputClass"
-        Identifier "touchpad"
-        MatchIsTouchpad "on"
-        Driver "libinput"
-        Option "Tapping" "on"
-        Option "TappingButtonMap" "lrm"
-        Option "NaturalScrolling" "on"
-        Option "ScrollMethod" "twofinger"
-EndSection
-
-EOF
 
 ## Few other apps
 
